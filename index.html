@@ -15,10 +15,11 @@
         #form{
             border: 1px solid black;
             height: 50px;
+            background-color: aqua;
         }
 
         #url{
-            margin-left: 450px;
+            margin-left: 840px;
             margin-top: 15px;
         }
         
@@ -27,61 +28,117 @@
         }
 
         #hide{
-            margin-left: 520px;
+            margin-left: 940px;
             margin-top: 10px;
         }
 
-
+        
        
       #img{
-          width: 300px;
-          height: 150px;
+          width: 350px;
+          height: 300px;
           margin-top: 150px;
-          margin-left: 400px;
+          margin-left: 800px;
       }   
 
-      #div_next{
+      #next{
+          
+          width: 30px;
+          height: 10px;
           float: right;
-          margin-top: -90px;
-          margin-right: 500px;
-          
+          margin-top: -180px;
+          margin-right: 690px;
+          background-image: url(http://s1.iconbird.com/ico/0912/ToolbarIcons/w256h2561346685452ArrowRight.png);
           
       }
 
-      #div_prev{
+      #prev{
           float: left;
-          margin-top: -90px;
-          margin-left: 350px;
+          margin-top: -180px;
+          margin-left: 730px;
       }
-
-
-
-
-      @media only screen 
-      and (max-device-width : 768px){
-        #div_next{
-           float: right;
-           margin-right: 400px;
+        
+        @media only screen and (max-width: 944px) and (max-height: 952px) {
+            
+            #form{
+                margin: 0px;
+                background-color: red;
+                
+            }
+            #url{
+                background-color: green;
+                float: left;
+                margin-left: 320px;
+            }
+            #hide{
+                margin-left: 430px;
+            }
+            #img{
+                margin-left: 290px;
+            }
+            #next{
+                margin-right: 230px;
+            }
+            #prev{
+                margin-left: 235px;
+            }
+        }
+       
+        
+        
+        @media only screen and (max-width: 500px) and (max-height: 952px){
+            #form{
+                margin: 0px;
+                background-color: green;
+                
+            }
+            
+            #next{
+                margin-right: 15px;
+            }
+            
+            #img{
+                margin-top: 53%;
+                margin-left: 13%;
+            }
+            #prev{
+                margin-left: 10px;
+            }
+            
+            #url{
+                margin-left: 100px;
+            }
+            #hide{
+                margin-left: 200px;
+            }
         }
 
-      }
-
-
-      @media only screen 
-      and (min-device-width : 768px){
-        #div_prev{
-           float: left;
-           margin-left: 350px;
+        
+        @media only screen and (max-width: 500px) and (max-height: 440px){
+            #form{
+                margin: 0px;
+                background-color: purple;
+                
+            }
+            
+            #img{
+                margin-top: 10px;
+            }
         }
-      }
-
-      @media only screen 
-      and (min-device-width : 768px){
-        #div_next{
-            float: right;
-            margin-right: 200px;
+        
+        @media only screen and (max-width: 500px) and (max-height: 600px){
+            #form{
+                margin: 0px;
+                background-color: coral;
+                
+            }
+            
+            #img{
+                margin-top: 20%;
+            }
         }
-      }
+        
+      
     </style>
 
 </head>
@@ -95,38 +152,36 @@
     
 
 
-    <div class="slider">
+    <div>
           <img id="img" src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png">
      
    </div>
 
         <div id="div_next">
-            <button id="next"> > </button>
+            <button id="next">  </button>
         </div>
         <div id="div_prev">
-            <button id="prev"> < </button>
+            <button id="prev">  </button>
         </div>
 
     <script>
 
-var isHide = false;
+        var isHide = false;
             var arr = [];
             var index= -1 ;
+     
 
         $(document).ready(function() {
 
 
 
-
             // Отслеживаем все изменения 
-            //field.addEventListener("user_data", function() {
-            //sessionStorage.setItem("autosave", field.value);
-            //});
+            field.addEventListener("user_data", function() {
+            sessionStorage.setItem("autosave", field.value);
+            });
 
 
-            //нахождение по ключу
-            //var key = sessionStorage.getItem(arr);
-            //$("src_to_img").html(key);
+          
 
 
 
@@ -140,13 +195,14 @@ var isHide = false;
            // index = $.cookie("last");
            var ss = $.session.get('user_data');
            if(ss != null){
-            arr = JSON.parse(ss);
-            index = $.session.get("last");
-            $("#img").attr("src", arr[index]);
+                arr = JSON.parse(ss);
+                index = $.session.get("last");
+                $("#img").attr("src", arr[index]);
            }
           
             
         $("#hide").click(function(){
+            
             if(isHide == false){
                 $("#form").hide();
                 isHide = true;
@@ -159,10 +215,7 @@ var isHide = false;
                 $("#hide").text("hide");
             }
         });
-
-
-
-        
+ 
         $("#ok").click(function(){
             arr.push( $("#src_to_img").val() );
             $("#src_to_img").val("");
@@ -192,23 +245,6 @@ var isHide = false;
            
             
         });
-
-
-     
-
-        
-
-
-
-
-
-   
-
-
-      
-	 
-
-
 
     </script>
 </body>
