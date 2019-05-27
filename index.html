@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="session.js"></script>
+
+    <title>Document</title>
+
+    <style>
+        #form{
+            border: 1px solid black;
+            height: 50px;
+        }
+
+        #url{
+            margin-left: 450px;
+            margin-top: 15px;
+        }
+        
+        #ok{
+            width: 50px;
+        }
+
+        #hide{
+            margin-left: 520px;
+            margin-top: 10px;
+        }
+
+
+       
+      #img{
+          width: 300px;
+          height: 150px;
+          margin-top: 150px;
+          margin-left: 400px;
+      }   
+
+      #div_next{
+          float: right;
+          margin-top: -90px;
+          margin-right: 500px;
+          
+          
+      }
+
+      #div_prev{
+          float: left;
+          margin-top: -90px;
+          margin-left: 350px;
+      }
+
+
+
+
+      @media only screen 
+      and (max-device-width : 768px){
+        #div_next{
+           float: right;
+           margin-right: 400px;
+        }
+
+      }
+
+
+      @media only screen 
+      and (min-device-width : 768px){
+        #div_prev{
+           float: left;
+           margin-left: 350px;
+        }
+      }
+
+      @media only screen 
+      and (min-device-width : 768px){
+        #div_next{
+            float: right;
+            margin-right: 200px;
+        }
+      }
+    </style>
+
+</head>
+<body>
+    <div id="form">
+        <div id="url"> 
+            <span>URL: </span><input type="text" id="src_to_img"><button id="ok">ok</button>
+        </div>  
+    </div>
+    <button id="hide">HIDE</button>
+    
+
+
+    <div class="slider">
+          <img id="img" src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png">
+     
+   </div>
+
+        <div id="div_next">
+            <button id="next"> > </button>
+        </div>
+        <div id="div_prev">
+            <button id="prev"> < </button>
+        </div>
+
+    <script>
+
+var isHide = false;
+            var arr = [];
+            var index= -1 ;
+
+        $(document).ready(function() {
+
+
+
+
+            // Отслеживаем все изменения 
+            //field.addEventListener("user_data", function() {
+            //sessionStorage.setItem("autosave", field.value);
+            //});
+
+
+            //нахождение по ключу
+            //var key = sessionStorage.getItem(arr);
+            //$("src_to_img").html(key);
+
+
+
+
+
+
+
+
+
+           // arr = JSON.parse($.cookie('user_data'));
+           // index = $.cookie("last");
+           var ss = $.session.get('user_data');
+           if(ss != null){
+            arr = JSON.parse(ss);
+            index = $.session.get("last");
+            $("#img").attr("src", arr[index]);
+           }
+          
+            
+        $("#hide").click(function(){
+            if(isHide == false){
+                $("#form").hide();
+                isHide = true;
+                $("#hide").text("show");
+            }
+            else{
+
+                $("#form").show();
+                isHide = false;
+                $("#hide").text("hide");
+            }
+        });
+
+
+
+        
+        $("#ok").click(function(){
+            arr.push( $("#src_to_img").val() );
+            $("#src_to_img").val("");
+
+            //$.cookie('user_data', JSON.stringify(arr));
+            $.session.set("user_data", JSON.stringify(arr));
+        });
+
+            $("#next").click(function(){
+                if(index < arr.length){
+                    index ++ ;
+                }
+                $("#img").attr("src", arr[index]);
+                //$.cookie("last" , index);
+                $.session.set("last" , index);
+            });
+
+            $("#prev").click(function(){
+                if(index -1 > -1 ){
+                    index --;
+                }
+                $("#img").attr("src", arr[index]);
+                //$.cookie("last" , index);
+                $.session.set("last" , index);
+            });
+
+           
+            
+        });
+
+
+     
+
+        
+
+
+
+
+
+   
+
+
+      
+	 
+
+
+
+    </script>
+</body>
+</html>
